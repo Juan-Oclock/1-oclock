@@ -1,0 +1,659 @@
+/* ============================================
+   Portfolio Styles - Wanaka Studio Inspired
+   Pure B&W with Rich Animations
+   ============================================ */
+
+/* ============================================
+   1. SMOOTH SCROLLING
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================
+   2. GRAIN TEXTURE OVERLAY
+   ============================================ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ============================================
+   3. KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Fade Up Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Text Reveal - Clip Path */
+@keyframes textReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Text Reveal - Bottom Up */
+@keyframes textRevealUp {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Floating Animation for Scroll Indicator */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* Underline Slide */
+@keyframes underlineSlide {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Pulse */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================
+   4. ANIMATION UTILITY CLASSES
+   ============================================ */
+
+/* Base scroll animation state */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade up variant */
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade in variant */
+.animate-fade-in {
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-in.visible {
+  opacity: 1;
+}
+
+/* Slide left variant */
+.animate-slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide right variant */
+.animate-slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale variant */
+.animate-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Text reveal variant */
+.animate-text-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-text-reveal.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ============================================
+   5. STAGGER DELAY UTILITIES
+   ============================================ */
+.stagger-1 { transition-delay: 0ms !important; }
+.stagger-2 { transition-delay: 100ms !important; }
+.stagger-3 { transition-delay: 200ms !important; }
+.stagger-4 { transition-delay: 300ms !important; }
+.stagger-5 { transition-delay: 400ms !important; }
+.stagger-6 { transition-delay: 500ms !important; }
+.stagger-7 { transition-delay: 600ms !important; }
+.stagger-8 { transition-delay: 700ms !important; }
+
+/* ============================================
+   6. HOVER UTILITIES
+   ============================================ */
+
+/* Lift on hover */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+}
+
+/* Subtle lift */
+.hover-lift-subtle {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift-subtle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Scale on hover */
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ============================================
+   7. BUTTON & LINK ANIMATIONS
+   ============================================ */
+
+/* Animated underline - slides from left */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Arrow animation */
+.arrow-animate {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .arrow-animate,
+.arrow-animate:hover {
+  transform: translateX(4px);
+}
+
+.arrow-animate-down {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .arrow-animate-down {
+  transform: translateY(4px);
+}
+
+/* ============================================
+   8. FLOATING ANIMATION
+   ============================================ */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ============================================
+   9. PARALLAX UTILITIES
+   ============================================ */
+.parallax-slow {
+  will-change: transform;
+}
+
+.parallax-text {
+  will-change: transform, opacity;
+}
+
+/* ============================================
+   10. CARD ENHANCEMENTS
+   ============================================ */
+
+/* Project card enhanced hover */
+.project-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-12px) rotate(0.5deg);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.25);
+}
+
+.project-card .card-image {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .card-image {
+  transform: scale(1.08);
+}
+
+.project-card .card-content {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .card-content {
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   11. BLOG LIST ENHANCEMENTS
+   ============================================ */
+.blog-item {
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.blog-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: rgba(0, 0, 0, 0.02);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-item:hover::before {
+  width: 100%;
+}
+
+/* ============================================
+   12. NAV ANIMATIONS
+   ============================================ */
+.nav-item {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.nav-item:nth-child(1) { animation-delay: 0.1s; }
+.nav-item:nth-child(2) { animation-delay: 0.2s; }
+.nav-item:nth-child(3) { animation-delay: 0.3s; }
+.nav-item:nth-child(4) { animation-delay: 0.4s; }
+.nav-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* ============================================
+   13. SECTION DIVIDERS
+   ============================================ */
+.section-divider {
+  width: 0;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-divider.visible {
+  width: 100%;
+}
+
+/* ============================================
+   14. WATERMARK TEXT
+   ============================================ */
+.watermark-text {
+  position: absolute;
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================
+   15. FORM ANIMATIONS
+   ============================================ */
+.input-underline {
+  position: relative;
+}
+
+.input-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-underline:focus-within::after {
+  transform: scaleX(1);
+}
+
+/* ============================================
+   16. SOCIAL ICON ANIMATIONS
+   ============================================ */
+.social-icon {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-4px);
+  color: black;
+}
+
+/* ============================================
+   17. MOBILE MENU ANIMATIONS
+   ============================================ */
+.mobile-menu-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu-open .mobile-menu-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobile-menu-open .mobile-menu-item:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu-open .mobile-menu-item:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu-open .mobile-menu-item:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu-open .mobile-menu-item:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu-open .mobile-menu-item:nth-child(5) { transition-delay: 0.3s; }
+
+/* ============================================
+   18. LOADING STATE
+   ============================================ */
+.page-loading {
+  opacity: 0;
+}
+
+.page-loaded {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* ============================================
+   19. PARTICLE ANIMATIONS (Hero Section)
+   ============================================ */
+
+/* Particle float animation - subtle movement */
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: var(--particle-opacity, 0.3);
+  }
+  25% {
+    transform: translate(10px, -15px);
+    opacity: calc(var(--particle-opacity, 0.3) * 1.2);
+  }
+  50% {
+    transform: translate(-5px, -25px);
+    opacity: var(--particle-opacity, 0.3);
+  }
+  75% {
+    transform: translate(-15px, -10px);
+    opacity: calc(var(--particle-opacity, 0.3) * 0.8);
+  }
+}
+
+/* Slow orb float animation */
+@keyframes particleFloatSlow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+/* Twinkle effect for stars */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: var(--particle-opacity, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    opacity: calc(var(--particle-opacity, 0.3) * 1.5);
+    transform: scale(1.2);
+  }
+}
+
+.particle-float {
+  animation: particleFloat var(--duration, 5s) ease-in-out infinite;
+  --particle-opacity: inherit;
+}
+
+.particle-float-slow {
+  animation: particleFloatSlow 8s ease-in-out infinite;
+}
+
+.particle-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* ============================================
+   20. STARFIELD BACKGROUND
+   ============================================ */
+.starfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* ============================================
+   21. COLOR TRANSITION UTILITIES
+   ============================================ */
+.color-transition {
+  transition: color 0.3s ease,
+              background-color 0.3s ease,
+              border-color 0.3s ease;
+}
+
+/* ============================================
+   22. GRADIENT OVERLAYS
+   ============================================ */
+.gradient-fade-bottom {
+  background: linear-gradient(to top, currentColor 0%, transparent 100%);
+}
+
+.gradient-fade-top {
+  background: linear-gradient(to bottom, currentColor 0%, transparent 100%);
+}
+
+/* ============================================
+   23. GLOBAL FLOATING PARTICLES
+   ============================================ */
+@keyframes particleDrift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(20px, -30px);
+  }
+  50% {
+    transform: translate(-10px, -50px);
+  }
+  75% {
+    transform: translate(-30px, -20px);
+  }
+}
+
+.particle-drift {
+  animation: particleDrift var(--duration, 8s) ease-in-out infinite;
+}
+
+/* ============================================
+   24. PARALLAX IMAGE EFFECT
+   ============================================ */
+.parallax-image {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.parallax-container {
+  overflow: hidden;
+}
+
+.parallax-container .parallax-image {
+  transform: scale(1.2);
+}
+
+/* ============================================
+   25. MARQUEE ANIMATION
+   ============================================ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
